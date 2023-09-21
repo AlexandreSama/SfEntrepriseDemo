@@ -31,7 +31,8 @@ class Entreprise
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_entreprise', targetEntity: Employe::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Employe::class, orphanRemoval: true)]
+    #[ORM\OrderBy(["nom" => 'ASC'])]
     private Collection $salaries;
 
     public function __construct()
@@ -56,9 +57,14 @@ class Entreprise
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDateCreation(): ?\DateTime
     {
         return $this->dateCreation;
+    }
+
+    public function getDateCreationFr(): ?string
+    {
+        return $this->dateCreation->format('d-m-y');
     }
 
     public function setDateCreation(\DateTimeInterface $dateCreation): static
@@ -136,6 +142,6 @@ class Entreprise
 
     public function __toString()
     {
-        return $this->raisonSociale." (".$this->cp." ".$this->ville.")";
+        return $this->raisonSociale;
     }
 }

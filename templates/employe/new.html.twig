@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un employé!{% endblock %}
+
+{% block body %}
+    {% if edit %}
+        <h1>Modifier un employé</h1>
+    {% else %}
+        <h1>Editer un employé</h1>
+    {% endif %}
+    <div class="container">
+        {{form_start(formCreate)}}
+        <div class="row flex-column">
+            <div class="col-sm">
+                {{form_row(formCreate.nom)}}
+            </div>
+            <div class="col-sm">
+                {{form_row(formCreate.prenom)}}
+            </div>
+            <div class="col-sm">
+                {{form_row(formCreate.dateNaissance)}}
+            </div>
+            <div class="col-sm">
+                {{form_row(formCreate.dateEmbauche)}}
+            </div>
+            <div class="col-sm">
+                {{form_row(formCreate.ville)}}
+            </div>
+            <div class="col-sm">
+                {{form_row(formCreate.entreprise)}}
+            </div>
+            {{form_row(formCreate.valider)}}
+            {{form_end(formCreate)}}
+        </div>
+    </div>
+{% endblock %}

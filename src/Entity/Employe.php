@@ -30,6 +30,9 @@ class Employe
     #[ORM\JoinColumn(nullable: false)]
     private ?Entreprise $entreprise = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $ville = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,9 +62,14 @@ class Employe
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function getDateNaissance(): ?\DateTime
     {
         return $this->dateNaissance;
+    }
+
+    public function getDateNaissanceFr(): ?string
+    {
+        return $this->dateNaissance->format('d-m-y');
     }
 
     public function setDateNaissance(?\DateTimeInterface $dateNaissance): static
@@ -71,9 +79,14 @@ class Employe
         return $this;
     }
 
-    public function getDateEmbauche(): ?\DateTimeInterface
+    public function getDateEmbauche(): ?\DateTime
     {
         return $this->dateEmbauche;
+    }
+
+    public function getDateEmbaucheFr(): ?string
+    {
+        return $this->dateEmbauche->format('d-m-y');
     }
 
     public function setDateEmbauche(\DateTimeInterface $dateEmbauche): static
@@ -97,6 +110,24 @@ class Employe
 
     public function __toString()
     {
-        return $this->prenom." ".$this->nom." (".$this->entreprise->getRaisonSociale().")";
+        return $this->prenom." ".$this->nom;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?string $ville): static
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getAge(): ?string{
+        $now = new \DateTime();
+        $interval = $this->dateNaissance->diff($now);
+        return $interval->format('%Y');
     }
 }

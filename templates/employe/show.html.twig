@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EmployeController!{% endblock %}
+
+{% block body %}
+    <h1>Détail de l'employé</h1>
+    <p>Nom : {{ employe.nom }}</p>
+    <p>Prénom : {{ employe.prenom }}</p>
+    <p>Date de naissance : {{ employe.dateNaissanceFr }}</p>
+    <p>Age : {{employe.age}} ans</p>
+    {% if employe.ville %}
+        <p>Ville : {{employe.ville}}</p>
+    {% else %}
+        <p>Ville : Non renseigné</p>
+    {% endif %}
+    <p>Date d'embauche : {{ employe.dateEmbaucheFr }}</p>
+    <p>Travaille dans l'entreprise : <a href="{{ path('show_entreprise', {'id': employe.entreprise.id })}}">{{ employe.entreprise.raisonSociale }}</a></p>
+{% endblock %}
