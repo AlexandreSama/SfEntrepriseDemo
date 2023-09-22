@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Employe;
 use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
 use App\Repository\EntrepriseRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EntrepriseController extends AbstractController
 {
-    #[Route('/entreprise', name: 'app_entreprise')]
+    #[Route('/', name: 'app_entreprise')]
     public function index(EntrepriseRepository $er): Response
     {
 
@@ -25,7 +28,7 @@ class EntrepriseController extends AbstractController
 
     #[Route('/entreprise/new', name: 'new_entreprise')]
     #[Route('/entreprise/{id}/edit', name: 'edit_entreprise')]
-    public function new_edit(Entreprise $entreprise = null, Request $request, EntityManagerInterface $em): Response{
+    public function new_edit(Entreprise $entreprise = null, Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response{
 
 
         if(!$entreprise){
@@ -37,12 +40,21 @@ class EntrepriseController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
 
-            $entreprise = $form->getData();
+            /** @var UploadedFile $profilePictureFile */
+            $profilePictureFile = $form->get('profilePicture')->getData();
 
-            $em->persist($entreprise);
-            $em->flush();
+            if ($profilePictureFile) {
 
-            return $this->redirectToRoute('app_entreprise');
+                $profilePictureName = $fileUploader->upload($profilePictureFile);
+                $entreprise->setProfilePicture($profilePictureName);
+
+                $entreprise = $form->getData();
+
+                $em->persist($entreprise);
+                $em->flush();
+    
+                return $this->redirectToRoute('app_entreprise');
+            }
         }
 
         return $this->render('entreprise/new.html.twig', [

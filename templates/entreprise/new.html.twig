@@ -1,36 +1,40 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Créer une entreprise{% endblock %}
-
-{% block body %}
-    {% if edit %}
-        <h1>Modifier une entreprise</h1>
-
-    {% else %}
-        <h1>Créer une entreprise</h1>
-    {% endif %}
-
-    <div class="container">
-        {{form_start(formCreate)}}
-        <div class="row flex-column">
-            <div class="col-sm">
-                {{form_row(formCreate.raisonSociale)}}
-            </div>
-            <div class="col-sm">
-                {{form_row(formCreate.dateCreation)}}
-            </div>
-            <div class="col-sm">
-                {{form_row(formCreate.adresse)}}
-            </div>
-            <div class="col-sm">
-                {{form_row(formCreate.cp)}}
-            </div>
-            <div class="col-sm">
-                {{form_row(formCreate.ville)}}
-            </div>
-            {{form_row(formCreate.valider)}}
-            {{form_end(formCreate)}}
-        </div>
+{% extends 'base.html.twig' %} {% block title %}Créer une entreprise{% endblock
+%} {% block body %}
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div
+      class="col-12 h-100 d-flex flex-column align-items-center justify-content-center"
+    >
+      {% if edit %}
+      <h1>Modifier une entreprise</h1>
+      {% else %}
+      <h1>Créer une entreprise</h1>
+      {% endif %}
+      {{ form_start(formCreate, { attr: { class: "w-25" } }) }}
+      <div class="col-sm">
+        {{ form_row(formCreate.raisonSociale) }}
+      </div>
+      <div class="col-sm">
+        {{ form_row(formCreate.dateCreation) }}
+      </div>
+      <div class="col-sm">
+        {{ form_row(formCreate.adresse) }}
+      </div>
+      <div class="col-sm">
+        {{ form_row(formCreate.cp) }}
+      </div>
+      <div class="col-sm">
+        {{ form_row(formCreate.ville) }}
+      </div>
+      <div class="col-sm">
+        {{ form_row(formCreate.profilePicture) }}
+      </div>
+      <div class="col-sm d-flex justify-content-center">
+        <button type="submit" class="btn btn-success">Valider</button>
+      </div>
+      {{ form_end(formCreate) }}
     </div>
+  </div>
+</div>
 
 {% endblock %}

@@ -1,0 +1,30 @@
+html{
+    height: 79%;
+}
+
+body{
+    height: 100%;
+}
+
+.bgAll{
+    background-image: url('../img/bgHome.jpg');
+    background-size: cover;
+}
+.backdrop{
+    backdrop-filter: brightness(0.5);
+}
+.textColor{
+    color: white!important;
+}
+
+.carousel-item.active{
+    display: flex!important;
+    justify-content: center;
+}
+.card-img-top{
+    height: 70%;
+}
+.card-img-top2{
+    height: 100%;
+    width: 100%;
+}

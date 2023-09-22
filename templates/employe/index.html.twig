@@ -1,12 +1,54 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello EmployeController!{% endblock %}
-
-{% block body %}
-    <h1>Liste des employés</h1>
-    {% for employe in employes %}
-        <p><a href="{{ path('show_employe', {'id': employe.id})}}">{{employe}}</a> ({{ employe.entreprise.raisonSociale}})</p>
-        <a class="btn btn-warning" href="{{path ('edit_employe', {'id': employe.id})}}">Edit</a>
-        <a href="{{ path('delete_employe', {'id': employe.id})}}" class="btn btn-danger">Supprimer</a>
-    {% endfor %}
+{% extends 'base.html.twig' %} {% block title %}Hello EmployeController!{%
+endblock %} {% block body %}
+<div class="container-fluid bgAll h-100">
+  <div class="row h-100">
+    <div class="col-12 backdrop d-flex text-center flex-column">
+      <h1 class="textColor">Liste des employés</h1>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Date d'embauche</th>
+            <th scope="col">Entreprise</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for employe in employes %}
+          <tr class="table-active">
+            <th scope="row">{{ employe.id }}</th>
+            <td><a href="{{ path('show_employe', { id: employe.id }) }}">{{ employe.nom }}</a></td>
+            <td>{{ employe.prenom }}</td>
+            <td>{{ employe.dateNaissanceFr }}</td>
+            <td>{{ employe.dateEmbaucheFr }}</td>
+            {% if employe.entreprise %}
+            <td>{{ employe.entreprise.raisonSociale }}</td>
+            {% else %}
+            <td>Est au chomage</td>
+            {% endif %}
+            <td>
+              <a
+                class="btn btn-warning"
+                href="{{ path('edit_employe', { id: employe.id }) }}"
+                >Modifier</a
+              >
+            </td>
+            <td>
+              <a
+                href="{{ path('delete_employe', { id: employe.id }) }}"
+                class="btn btn-danger"
+                >Supprimer</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}

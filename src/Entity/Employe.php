@@ -27,7 +27,7 @@ class Employe
     private ?\DateTimeInterface $dateEmbauche = null;
 
     #[ORM\ManyToOne(inversedBy: 'salaries')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Entreprise $entreprise = null;
 
     #[ORM\Column(length: 50, nullable: true)]

@@ -58,6 +58,16 @@ class EmployeController extends AbstractController
 
     }
 
+    #[Route('/employe/{id}/fired', name: 'fired_employe')]
+    public function fired(Employe $employe, EntityManagerInterface $em)
+    {
+        $employe->setEntreprise(null);
+        $em->persist($employe);
+        $em->flush();
+        return $this->redirectToRoute('app_employe');
+
+    }
+
     #[Route('/employe/{id}', name: 'show_employe')]
     public function show(Employe $employe): Response
     {

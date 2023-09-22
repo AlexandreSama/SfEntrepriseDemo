@@ -3,16 +3,22 @@
 {% block title %}Hello EmployeController!{% endblock %}
 
 {% block body %}
-    <h1>Détail de l'employé</h1>
-    <p>Nom : {{ employe.nom }}</p>
-    <p>Prénom : {{ employe.prenom }}</p>
-    <p>Date de naissance : {{ employe.dateNaissanceFr }}</p>
-    <p>Age : {{employe.age}} ans</p>
-    {% if employe.ville %}
-        <p>Ville : {{employe.ville}}</p>
-    {% else %}
-        <p>Ville : Non renseigné</p>
-    {% endif %}
-    <p>Date d'embauche : {{ employe.dateEmbaucheFr }}</p>
-    <p>Travaille dans l'entreprise : <a href="{{ path('show_entreprise', {'id': employe.entreprise.id })}}">{{ employe.entreprise.raisonSociale }}</a></p>
+<div class="container-fluid bgAll h-100">
+    <div class="row h-100">
+        <div class="col-12 backdrop d-flex text-center flex-column justify-content-center">
+            <h1 class="textColor">Profile de l'employé</h1>
+            <p class="textColor">Nom : {{ employe.nom }}</p>
+            <p class="textColor">Prénom : {{ employe.prenom }}</p>
+            <p class="textColor">Date de naissance : {{ employe.dateNaissanceFr }}</p>
+            <p class="textColor">Age : {{employe.age}} ans</p>
+            {% if employe.ville %}
+                <p class="textColor">Ville : {{employe.ville}}</p>
+            {% else %}
+                <p class="textColor">Ville : Non renseigné</p>
+            {% endif %}
+            <p class="textColor">Date d'embauche : {{ employe.dateEmbaucheFr }}</p>
+            <p class="textColor">Travaille dans l'entreprise : <a href="{{ path('show_entreprise', {'id': employe.entreprise.id })}}">{{ employe.entreprise.raisonSociale }}</a></p>
+        </div>
+    </div>
+</div>
 {% endblock %}

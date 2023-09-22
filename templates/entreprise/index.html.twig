@@ -1,12 +1,86 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Hello EntrepriseController! {%
+endblock %} {% block body %}
+<div class="container-fluid bgAll h-100">
+  <div class="row h-100">
+    <div class="col-12 backdrop d-flex text-center flex-column justify-content-between">
+      <h1 class="textColor">Liste des entreprises</h1>
 
-{% block title %}Hello EntrepriseController!{% endblock %}
+      <div id="carouselExampleAutoplaying" class="carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+          {% for key, entreprise in entreprises %}
 
-{% block body %}
-    <h1>Liste des entreprises</h1>
-    {% for entreprise in entreprises %}
-        <p><a href="{{ path('show_entreprise', {'id': entreprise.id})}}">{{entreprise}}</a></p>
-        <a class="btn btn-warning" href="{{ path('edit_entreprise', {'id' : entreprise.id})}}">Edit</a>
-        <a href="{{ path('delete_entreprise', {'id': entreprise.id})}}" class="btn btn-danger">Supprimer</a>
-    {% endfor %}
+          {% if key <= 4 %}
+            <div class="card me-4" style="width: 18rem;">
+              <img src="{{ asset('uploads/' ~ entreprise.profilePicture)}}" class="card-img-top" alt="Photo de profile de l'entreprise">
+              <div class="card-body">
+                <p class="card-text"><a href="{{path('show_entreprise', {'id': entreprise.id})}}">{{entreprise.raisonSociale}}</a></p>
+              </div>
+            </div>
+          {% endif %}
+          
+          {% if key > 4 %}
+
+            {% if key == 5 %}
+            </div>
+            <div class="carousel-item" data-bs-interval="20000">
+            {% endif %}
+            <div class="card me-4" style="width: 18rem;">
+              <img src="{{ asset('uploads/' ~ entreprise.profilePicture)}}" class="card-img-top" alt="Photo de profile de l'entreprise">
+              <div class="card-body">
+                <p class="card-text"><a href="{{path('show_entreprise', {'id': entreprise.id})}}">{{entreprise.raisonSociale}}</a></p>
+              </div>
+            </div>
+          {% endif %}
+
+          {% endfor %}
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div id="carouselExampleAutoplaying2" class="carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+          {% for key, entreprise in entreprises %}
+
+          {% if key <= 4 %}
+            <div class="card me-4" style="width: 18rem;">
+              <a href="#"><img src="{{ asset('img/' ~ entreprise.raisonSociale)}}.png" class="card-img-top2" alt="Photo de profile de l'entreprise"></a>
+            </div>
+          {% endif %}
+          
+          {% if key > 4 %}
+
+            {% if key == 5 %}
+            </div>
+            <div class="carousel-item" data-bs-interval="20000">
+            {% endif %}
+            <div class="card me-4" style="width: 18rem;">
+              <a href="#"><img src="{{ asset('img/' ~ entreprise.raisonSociale)}}.png" class="card-img-top2" alt="Photo de profile de l'entreprise"></a>
+            </div>
+          {% endif %}
+
+          {% endfor %}
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying2" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying2" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

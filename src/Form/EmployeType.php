@@ -52,11 +52,11 @@ class EmployeType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('valider', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-success'
-                ]
-            ])
+            // ->add('valider', SubmitType::class, [
+            //     'attr' => [
+            //         'class' => 'btn btn-success '
+            //     ]
+            // ])
         ;
     }
 

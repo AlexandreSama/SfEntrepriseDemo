@@ -35,6 +35,9 @@ class Entreprise
     #[ORM\OrderBy(["nom" => 'ASC'])]
     private Collection $salaries;
 
+    #[ORM\Column(length: 255)]
+    private ?string $profilePicture = null;
+
     public function __construct()
     {
         $this->salaries = new ArrayCollection();
@@ -143,5 +146,17 @@ class Entreprise
     public function __toString()
     {
         return $this->raisonSociale;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(string $profilePicture): static
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
     }
 }
