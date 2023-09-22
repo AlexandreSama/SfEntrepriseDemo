@@ -11,10 +11,10 @@ endblock %} {% block body %}
           {% for key, entreprise in entreprises %}
 
           {% if key <= 4 %}
-            <div class="card me-4" style="width: 18rem;">
+            <div class="card me-4 glass" style="width: 18rem;">
               <img src="{{ asset('uploads/' ~ entreprise.profilePicture)}}" class="card-img-top" alt="Photo de profile de l'entreprise">
               <div class="card-body">
-                <p class="card-text"><a href="{{path('show_entreprise', {'id': entreprise.id})}}">{{entreprise.raisonSociale}}</a></p>
+                <p class="card-text"><a href="{{path('show_entreprise', {'id': entreprise.id})}}" class="textColor">{{entreprise.raisonSociale}}</a></p>
               </div>
             </div>
           {% endif %}
@@ -25,10 +25,10 @@ endblock %} {% block body %}
             </div>
             <div class="carousel-item" data-bs-interval="20000">
             {% endif %}
-            <div class="card me-4" style="width: 18rem;">
+            <div class="card me-4 glass" style="width: 18rem;">
               <img src="{{ asset('uploads/' ~ entreprise.profilePicture)}}" class="card-img-top" alt="Photo de profile de l'entreprise">
               <div class="card-body">
-                <p class="card-text"><a href="{{path('show_entreprise', {'id': entreprise.id})}}">{{entreprise.raisonSociale}}</a></p>
+                <p class="card-text"><a href="{{path('show_entreprise', {'id': entreprise.id})}}" class="textColor">{{entreprise.raisonSociale}}</a></p>
               </div>
             </div>
           {% endif %}
@@ -53,7 +53,7 @@ endblock %} {% block body %}
 
           {% if key <= 4 %}
             <div class="card me-4" style="width: 18rem;">
-              <a href="#"><img src="{{ asset('img/' ~ entreprise.raisonSociale)}}.png" class="card-img-top2" alt="Photo de profile de l'entreprise"></a>
+              <a href="https://www.{{entreprise.raisonSociale}}.fr"><img src="{{ asset('img/' ~ entreprise.raisonSociale)}}.png" class="card-img-top2" alt="Photo de profile de l'entreprise"></a>
             </div>
           {% endif %}
           
@@ -64,7 +64,7 @@ endblock %} {% block body %}
             <div class="carousel-item" data-bs-interval="20000">
             {% endif %}
             <div class="card me-4" style="width: 18rem;">
-              <a href="#"><img src="{{ asset('img/' ~ entreprise.raisonSociale)}}.png" class="card-img-top2" alt="Photo de profile de l'entreprise"></a>
+              <a href="https://www.{{entreprise.raisonSociale}}.fr"><img src="{{ asset('img/' ~ entreprise.raisonSociale)}}.png" class="card-img-top2" alt="Photo de profile de l'entreprise"></a>
             </div>
           {% endif %}
 
