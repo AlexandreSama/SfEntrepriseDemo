@@ -42,6 +42,35 @@
     {% else %}
         <p>Pas d'employés dans l'entreprise !</p>
     {% endif %}
+    {% if employes | length >= 1 %}
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Engager</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for employe in employes %}
+          <tr class="table-active">
+              <th scope="row">{{ employe.id }}</th>
+              <td><a href="{{ path('show_employe', { id: employe.id }) }}">{{ employe.nom }}</a></td>
+              <td>{{ employe.prenom }}</td>
+              <td>{{ employe.dateNaissanceFr }}</td>
+              {% if employe.ville %}
+              <td>{{ employe.ville }}</td>
+              {% else %}
+              <td>Non renseigné</td>
+              {% endif %}
+              <td><a class="btn btn-warning" href="{{ path('hired_employe', { 'id': entreprise.id, 'idemploye': employe.id}) }}" >Engager</a></td>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
 </div>
 
 {% endblock %}

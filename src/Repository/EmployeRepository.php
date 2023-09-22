@@ -45,4 +45,12 @@ class EmployeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findUsersWithNullEntreprise()
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.entreprise IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
 }

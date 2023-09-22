@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Employe;
 use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
+use App\Repository\EmployeRepository;
 use App\Repository\EntrepriseRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -73,11 +74,24 @@ class EntrepriseController extends AbstractController
 
     }
 
+    #[Route('/entreprise/{id}/{idemploye}/hired', name: 'hired_employe')]
+    public function hired(Entreprise $entreprise, Employe $employe, EntityManagerInterface $em)
+    {
+        $entreprise->addSalary($employe);
+        $em->persist($entreprise);
+        $em->flush();
+        return $this->redirectToRoute('app_employe');
+
+    }
+
     #[Route('/entreprise/{id}', name: 'show_entreprise')]
-    public function show(Entreprise $entreprise): Response{
+    public function show(Entreprise $entreprise, EmployeRepository $employeRepository): Response{
+
+        $employes = $employeRepository->findUsersWithNullEntreprise();
 
         return $this->render('entreprise/show.html.twig', [
-            'entreprise' => $entreprise
+            'entreprise' => $entreprise,
+            'employes' => $employes
         ]);
     }
 }
